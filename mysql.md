@@ -24,28 +24,199 @@ CREATE DATABASE university;
 SHOW DATABASES;
 USE university;
 
-CREATE TABLE student (
-    student_id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
+Below is a simple **MySQL CRUD practice lab** using a `university` database and a `students` table.
+
+### 1. Create Database
+
+```sql
+CREATE DATABASE university;
+
+USE university;
+```
+
+### 2. Create Students Table
+
+```sql
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    course VARCHAR(100),
     age INT,
-    gender VARCHAR(10),
-    department VARCHAR(50),
-    email VARCHAR(100),
-    phone VARCHAR(15),
-    city VARCHAR(50),
-    admission_date DATE
+    city VARCHAR(100)
+);
+```
+
+Check the table:
+
+```sql
+SHOW TABLES;
+
+DESC students;
+```
+
+### 3. CREATE — Insert Student Records
+
+Insert one student:
+
+```sql
+INSERT INTO students (name, email, course, age, city)
+VALUES ('Rahul Sharma', 'rahul@gmail.com', 'Computer Science', 21, 'Pune');
+```
+
+Insert multiple students:
+
+```sql
+INSERT INTO students (name, email, course, age, city)
+VALUES
+('Priya Patil', 'priya@gmail.com', 'Information Technology', 22, 'Mumbai'),
+('Amit Kumar', 'amit@gmail.com', 'Computer Science', 20, 'Delhi'),
+('Sneha Joshi', 'sneha@gmail.com', 'Data Science', 23, 'Pune'),
+('Rohan Singh', 'rohan@gmail.com', 'Cyber Security', 21, 'Mumbai');
+```
+
+### 4. READ — Retrieve Records
+
+View all students:
+
+```sql
+SELECT * FROM students;
+```
+
+Find a specific student:
+
+```sql
+SELECT * FROM students
+WHERE student_id = 1;
+```
+
+Students from Pune:
+
+```sql
+SELECT * FROM students
+WHERE city = 'Pune';
+```
+
+Select specific columns:
+
+```sql
+SELECT name, course, city
+FROM students;
+```
+
+Filter by age:
+
+```sql
+SELECT * FROM students
+WHERE age >= 22;
+```
+
+Sort students:
+
+```sql
+SELECT * FROM students
+ORDER BY name ASC;
+```
+
+### 5. UPDATE — Modify Records
+
+Change a student's city:
+
+```sql
+UPDATE students
+SET city = 'Nagpur'
+WHERE student_id = 1;
+```
+
+Change multiple fields:
+
+```sql
+UPDATE students
+SET course = 'Artificial Intelligence',
+    age = 22
+WHERE student_id = 1;
+```
+
+Verify:
+
+```sql
+SELECT * FROM students
+WHERE student_id = 1;
+```
+
+### 6. DELETE — Remove Records
+
+Delete one student:
+
+```sql
+DELETE FROM students
+WHERE student_id = 5;
+```
+
+Verify:
+
+```sql
+SELECT * FROM students;
+```
+
+Delete students from a particular city:
+
+```sql
+DELETE FROM students
+WHERE city = 'Mumbai';
+```
+
+### CRUD Summary
+
+| CRUD           | SQL Command | Purpose             |
+| -------------- | ----------- | ------------------- |
+| **C – Create** | `INSERT`    | Add new student     |
+| **R – Read**   | `SELECT`    | View student data   |
+| **U – Update** | `UPDATE`    | Modify student data |
+| **D – Delete** | `DELETE`    | Remove student data |
+
+### Complete Practice Flow
+
+```sql
+-- Create Database
+CREATE DATABASE university;
+USE university;
+
+-- Create Table
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    course VARCHAR(100),
+    age INT,
+    city VARCHAR(100)
 );
 
-INSERT INTO student
-(first_name,last_name,age,gender,department,email,phone,city,admission_date)
+-- CREATE
+INSERT INTO students (name, email, course, age, city)
 VALUES
-('Atul','Kamble',24,'Male','Computer Science','atul@example.com','9876543210','Pune','2026-05-21'),
+('Rahul Sharma', 'rahul@gmail.com', 'Computer Science', 21, 'Pune'),
+('Priya Patil', 'priya@gmail.com', 'Information Technology', 22, 'Mumbai'),
+('Amit Kumar', 'amit@gmail.com', 'Computer Science', 20, 'Delhi');
 
-('Ravi','Sharma',22,'Male','Mechanical','ravi@example.com','9876501234','Mumbai','2026-05-20'),
+-- READ
+SELECT * FROM students;
 
-('Sneha','Patil',23,'Female','Electronics','sneha@example.com','9876512345','Nagpur','2026-05-19');
+-- UPDATE
+UPDATE students
+SET course = 'Data Science'
+WHERE student_id = 1;
 
+-- READ Updated Record
+SELECT * FROM students
+WHERE student_id = 1;
 
-SELECT *from student;
+-- DELETE
+DELETE FROM students
+WHERE student_id = 3;
+
+-- Final Records
+SELECT * FROM students;
 ```
+
+**Important:** Always use a `WHERE` condition with `UPDATE` and `DELETE` unless you intentionally want to modify/delete **all rows**.
