@@ -220,3 +220,156 @@ SELECT * FROM students;
 ```
 
 **Important:** Always use a `WHERE` condition with `UPDATE` and `DELETE` unless you intentionally want to modify/delete **all rows**.
+
+RDS - manged Relational databsase service 
+
+backup 
+replication 
+security 
+availablity 
+scalability - infra 
+
+// RDS 
+
+>> free >> mysql >> community edition 
+
+database - mydatabase
+username - admin
+master password - Admin123456
+
+connectivity - public 
+
+choco install mysql 
+
+curl -o global-bundle.pem https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+
+mysql -h mydatabase.c3iuq8u6iyy3.us-east-1.rds.amazonaws.com -P 3306 -u admin -p --ssl-mode=VERIFY_IDENTITY --ssl-ca=./global-bundle.pem
+
+
+
+```
+mysql >>
+
+powershell run as admin >> 
+choco install mysql
+
+
+mysql >> 3306
+http - 80 
+https - 443 
+ssh - 22
+
+sudo dnf install mariadb1011 -y
+sudo dnf install mariadb1011-server -y
+mysql --version
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+sudo systemctl status mariadb
+
+sudo mysql 
+
+SHOW DATABASES;
+
+CREATE DATABASE university;
+
+SHOW DATABASES;
+
+USE university;
+
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    course VARCHAR(100),
+    age INT,
+    city VARCHAR(100)
+);
+
+SHOW TABLES;
+
+SELECT *from students;
+
+DESC students;
+
+INSERT INTO students (name, email, course, age, city)
+VALUES ('Rahul Sharma', 'rahul@gmail.com', 'Computer Science', 21, 'Pune');
+
+SELECT *from students;
+
+
+```
+
+
+INSERT INTO students (name, email, course, age, city)
+VALUES
+('Priya Patil', 'priya@gmail.com', 'Information Technology', 22, 'Mumbai'),
+('Amit Kumar', 'amit@gmail.com', 'Computer Science', 20, 'Delhi'),
+('Sneha Joshi', 'sneha@gmail.com', 'Data Science', 23, 'Pune'),
+('Rohan Singh', 'rohan@gmail.com', 'Cyber Security', 21, 'Mumbai');
+
+
+SELECT * FROM students;
+
+| CRUD           | SQL Command | Purpose             |
+| -------------- | ----------- | ------------------- |
+| **C – Create** | `INSERT`    | Add new student     |
+| **R – Read**   | `SELECT`    | View student data   |
+| **U – Update** | `UPDATE`    | Modify student data |
+| **D – Delete** | `DELETE`    | Remove student data |
+
+SELECT * FROM students
+WHERE student_id = 1;
+
+SELECT * FROM students
+WHERE city = 'Pune';
+
+SELECT name, course, city
+FROM students;
+
+SELECT * FROM students
+WHERE age >= 22;
+
+SELECT * FROM students
+ORDER BY name ASC;
+
+
+
+UPDATE students
+SET city = 'Nagpur'
+WHERE student_id = 1;
+
+
+UPDATE students
+SET course = 'Artificial Intelligence',
+    age = 22
+WHERE student_id = 1;
+
+
+SELECT * FROM students
+WHERE student_id = 1;
+
+
+DELETE FROM students
+WHERE student_id = 5;
+
+
+SELECT * FROM students;
+
+
+DELETE FROM students
+WHERE city = 'Mumbai';
+
+
+
+**Important:** Always use a `WHERE` condition with `UPDATE` and `DELETE` unless you intentionally want to modify/delete **all rows**.
+
+
+
+
+
+
+
+
+
+
+
